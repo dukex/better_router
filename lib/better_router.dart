@@ -1,6 +1,6 @@
-/// Support for doing something awesome.
+/// A powerful, but for humans, flutter router.
 ///
-/// More dartdocs go here.
+/// The better_router library are responsable to expose the [BetterRouter] class.
 library better_router;
 
 export 'src/better_router_base.dart' show BetterRouter;
