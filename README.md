@@ -47,8 +47,7 @@ void main() {
                 child: Text(books[i].name))
         ])),
     r"\/books\/(?<id>.+)": DefaultPageRouteBuilder((context) {
-      final params =
-          ModalRoute.of(context)!.settings.arguments as Map<String, String?>;
+      final params = RouteParams.of(context);
 
       return Column(
         children: [Text('book page'), Text("Book ID: ${params['id']}")],
