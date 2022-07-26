@@ -14,7 +14,7 @@ final routes = <String, PageRoute<dynamic> Function(RouteSettings)>{
         TextButton(
             onPressed: () =>
                 Navigator.pushNamed(context, "/custom_route_transition"),
-            child: Text("Go to route transition"))
+            child: Text("Go to custom transition"))
       ])),
   '/books': DefaultPageRouteBuilder((context) => Column(children: [
         for (var i = 0; i < books.length; i++)
