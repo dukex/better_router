@@ -1,3 +1,9 @@
+## 2.1.0
+
+### Features
+
+- Create RouteParams.of(context) - allowing get the route params easily
+
 ## 2.0.0
 
 ### BREAKING CHANGES
