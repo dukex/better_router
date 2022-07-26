@@ -33,7 +33,7 @@ final routes = <String, PageRoute<dynamic> Function(RouteSettings)>{
   }),
   '/custom_route_transition': (RouteSettings settings) => PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
-          Text("Transition \o/"),
+          Text("Transition"),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
         var end = Offset.zero;
