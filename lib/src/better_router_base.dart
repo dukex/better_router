@@ -49,7 +49,7 @@ class BetterRouter {
     final PageRouteBuilder pageRouteBuilder = routes[routeInfo.path]!;
 
     final Route<dynamic> route = _pageRouteBuilder<dynamic>(
-      settings.copyWith(arguments: routeInfo.data),
+      RouteSettings(name: settings.name, arguments: routeInfo.data),
       pageRouteBuilder,
     );
 
