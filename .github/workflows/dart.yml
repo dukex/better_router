@@ -2,20 +2,38 @@ name: Dart
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
+  pubspec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: pubspec
+        name: Generate matrix from pubspec.yaml
+        uses: flutter-actions/pubspec-matrix-action@v1
+        with:
+          pubspec: "pubspec.yaml"
+    outputs:
+      matrix: ${{ steps.pubspec.outputs.matrix }}
+
   build:
+    needs: [pubspec]
+    strategy:
+      matrix: ${{fromJson(needs.pubspec.outputs.matrix)}}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
+      - uses: flutter-actions/setup-flutter@v3
         with:
-          channel: 'stable'
+          channel: "stable"
+          version: ${{ matrix.release.flutter }}
+
       - run: flutter --version
 
       - name: Install dependencies
