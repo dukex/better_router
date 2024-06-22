@@ -1,3 +1,14 @@
+## 2.2.0
+
+### Fixes
+
+- Remove deprecated method
+
+### Internal
+
+- Test package at many dart and flutter versions to avoid break changes
+- Fix documentation typo
+
 ## 2.1.0
 
 ### Features
@@ -12,7 +23,7 @@ Before this version the routes was:
 ```
 final Map<String, WidgetBuilder> routes;
 ```
- 
+
 Now the routes are:
 ```
  final Map<String, PageRouteBuilder> routes;
