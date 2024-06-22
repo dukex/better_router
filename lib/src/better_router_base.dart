@@ -5,7 +5,7 @@ import 'matcher.dart';
 
 typedef PageRouteBuilder = PageRoute Function(RouteSettings settings);
 
-/// The BetterRouter class are resposible create the routing table and the route generator.
+/// The BetterRouter class are responsible create the routing table and the route generator.
 ///
 /// To simple routes is better use the routes params in [MaterialApp]:
 ///
