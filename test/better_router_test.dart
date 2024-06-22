@@ -21,22 +21,22 @@ void main() {
               onPressed: () =>
                   Navigator.pushNamed(context, "/custom_route_transition"),
               child: Text("Custom Route"))
-        ])),
-    '/home': DefaultPageRouteBuilder((_) => Text('home page')),
+        ])).call,
+    '/home': DefaultPageRouteBuilder((_) => Text('home page')).call,
     '/books': DefaultPageRouteBuilder((context) => Column(children: [
           for (var i = 0; i < books.length; i++)
             TextButton(
                 onPressed: () =>
                     Navigator.pushNamed(context, "/books/${books[i].id}"),
                 child: Text(books[i].name))
-        ])),
+        ])).call,
     r"\/books\/(?<id>.+)": DefaultPageRouteBuilder((context) {
       final params = RouteParams.of(context);
 
       return Column(
         children: [Text('book page'), Text("Book ID: ${params['id']}")],
       );
-    }),
+    }).call,
     '/custom_route_transition': (RouteSettings settings) => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
             Text("Custom route page"),
@@ -51,11 +51,11 @@ void main() {
             child: child,
           );
         }),
-    '-matchAll': DefaultPageRouteBuilder((_) => Text('not found page')),
+    '-matchAll': DefaultPageRouteBuilder((_) => Text('not found page')).call,
   });
 
   testWidgets('navigates to root page by default', (tester) async {
-    await tester.pumpWidget(MaterialApp(onGenerateRoute: betterRoutes));
+    await tester.pumpWidget(MaterialApp(onGenerateRoute: betterRoutes.call));
 
     final textFinder = find.text("root page");
     expect(textFinder, findsOneWidget);
@@ -65,7 +65,7 @@ void main() {
 
   testWidgets('respects the initialRoute', (tester) async {
     await tester.pumpWidget(
-        MaterialApp(initialRoute: '/home', onGenerateRoute: betterRoutes));
+        MaterialApp(initialRoute: '/home', onGenerateRoute: betterRoutes.call));
 
     final textFinder = find.byType(Text);
     expect(textFinder, findsOneWidget);
@@ -74,7 +74,7 @@ void main() {
   });
 
   testWidgets('navigates using Navigator', (tester) async {
-    await tester.pumpWidget(MaterialApp(onGenerateRoute: betterRoutes));
+    await tester.pumpWidget(MaterialApp(onGenerateRoute: betterRoutes.call));
 
     final button = find.text("Books");
     expect(button, findsOneWidget);
@@ -87,8 +87,8 @@ void main() {
   });
 
   testWidgets('navigates send params', (tester) async {
-    await tester.pumpWidget(
-        MaterialApp(initialRoute: '/books', onGenerateRoute: betterRoutes));
+    await tester.pumpWidget(MaterialApp(
+        initialRoute: '/books', onGenerateRoute: betterRoutes.call));
 
     final book = books[0];
 
@@ -104,7 +104,7 @@ void main() {
 
   testWidgets('navigates using custom route', (tester) async {
     await tester.pumpWidget(
-        MaterialApp(initialRoute: '/', onGenerateRoute: betterRoutes));
+        MaterialApp(initialRoute: '/', onGenerateRoute: betterRoutes.call));
 
     final buttonFinder = find.text("Custom Route");
 
@@ -116,8 +116,8 @@ void main() {
   });
 
   testWidgets('renders -matchAll when not found', (tester) async {
-    await tester.pumpWidget(
-        MaterialApp(initialRoute: '/not_found', onGenerateRoute: betterRoutes));
+    await tester.pumpWidget(MaterialApp(
+        initialRoute: '/not_found', onGenerateRoute: betterRoutes.call));
 
     final textFinder = find.text("not found page");
     expect(textFinder, findsOneWidget);

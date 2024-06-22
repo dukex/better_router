@@ -15,21 +15,21 @@ final routes = <String, PageRoute<dynamic> Function(RouteSettings)>{
             onPressed: () =>
                 Navigator.pushNamed(context, "/custom_route_transition"),
             child: Text("Go to custom transition"))
-      ])),
+      ])).call,
   '/books': DefaultPageRouteBuilder((context) => Column(children: [
         for (var i = 0; i < books.length; i++)
           TextButton(
               onPressed: () =>
                   Navigator.pushNamed(context, "/books/${books[i].id}"),
               child: Text(books[i].name))
-      ])),
+      ])).call,
   r"\/books\/(?<id>.+)": DefaultPageRouteBuilder((context) {
     final params = RouteParams.of(context);
 
     return Column(
       children: [Text('book page'), Text("Book ID: ${params['id']}")],
     );
-  }),
+  }).call,
   '/custom_route_transition': (RouteSettings settings) => PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
           Text("Transition"),
@@ -44,13 +44,13 @@ final routes = <String, PageRoute<dynamic> Function(RouteSettings)>{
           child: child,
         );
       }),
-  '-matchAll': DefaultPageRouteBuilder((_) => Text('not found page')),
+  '-matchAll': DefaultPageRouteBuilder((_) => Text('not found page')).call,
 };
 
 void main() {
   final betterRoutes = BetterRouter(routes: routes);
 
-  runApp(MaterialApp(onGenerateRoute: betterRoutes));
+  runApp(MaterialApp(onGenerateRoute: betterRoutes.call));
 }
 
 final books = [

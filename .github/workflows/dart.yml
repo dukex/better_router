@@ -16,7 +16,7 @@ jobs:
         name: Generate matrix from pubspec.yaml
         uses: flutter-actions/pubspec-matrix-action@v1
         with:
-          pubspec: "pubspec.yaml"
+          channel: "stable"
     outputs:
       matrix: ${{ steps.pubspec.outputs.matrix }}
 
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: flutter-actions/setup-flutter@v3
         with:
@@ -35,6 +35,9 @@ jobs:
           version: ${{ matrix.release.flutter }}
 
       - run: flutter --version
+
+      - run: dart pub add lints
+      - run: dart pub add test
 
       - name: Install dependencies
         run: flutter pub get
